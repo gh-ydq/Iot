@@ -29,11 +29,11 @@ public class ParsePHPackageService extends ParsePackageServiceImpl{
 //		byte soc = bytes[23];
 		GPRSSubStatus gprsSubStatus = buildPHSubStatus(status);
 		PHErrorCode errorCode = buildPHErrorCode(ecode);
-		PHPacketDto phPacketDto = buildPGPacketDto(header0, header1, imei, seq, status, imsi, 
+		PHPacketDto phPacketDto = buildPHPacketDto(bytes.length,header0, header1, imei, seq, status, imsi, 
 				powerVoltage, batteryVotage, sensity, star, ecode,gprsSubStatus,errorCode);
 		PHManage phManage = new PHManage();
-		phManage.savePHInfo(phPacketDto);
-		phManage.sendMsg(phPacketDto);
+//		phManage.savePHInfo(phPacketDto);
+//		phManage.sendMsg(phPacketDto);
 		return phPacketDto;
    }
 	
@@ -54,7 +54,6 @@ public class ParsePHPackageService extends ParsePackageServiceImpl{
 		phSubStatus.setEDoorSwitchStatus(eDoorSwitchStatus);
 		phSubStatus.setSilentModeStatus(silentModeStatus);
 		phSubStatus.setBluetoothLockStatus(bluetoothLockStatus);
-		System.out.println("phSubStatus["+phSubStatus+"]");
 		return phSubStatus;
 	}
 	
@@ -76,10 +75,11 @@ public class ParsePHPackageService extends ParsePackageServiceImpl{
 		return errorCode;
 	}
 	
-	private PHPacketDto buildPGPacketDto(char header0,char header1,int imei,
+	private PHPacketDto buildPHPacketDto(int byteLength,char header0,char header1,int imei,
 			byte seq,byte status,long imsi, short powerVoltage,short batteryVotage,
 			byte sensity,byte star,byte ecode,GPRSSubStatus gprsSubStatus,PHErrorCode phErrorCode){
 		PHPacketDto phPacketDto = new PHPacketDto();
+		phPacketDto.setLength(byteLength);
 		phPacketDto.setHeader0(header0);
 		phPacketDto.setHeader1(header1);
 		phPacketDto.setImei(imei);
@@ -92,7 +92,7 @@ public class ParsePHPackageService extends ParsePackageServiceImpl{
 		phPacketDto.setStar(star);
 		phPacketDto.setEcode(ecode);
 		phPacketDto.setGprsSubStatus(gprsSubStatus);
-		logger.info("phPacketDto["+phPacketDto+"]");
+		logger.info("phPacketDto["+phPacketDto.toString()+"]");
 		return phPacketDto;
 	}
 }

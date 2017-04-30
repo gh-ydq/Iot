@@ -24,11 +24,11 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
 	            byte[] bytes = new byte[buf.readableBytes()];
 	            buf.readBytes(bytes);
 	            logger.info("接收请求数count={}",count);
-//	            try {
+	            try {
 	            ParseByteUtil.iteratorBytes(bytes,ctx);
-//				} catch (Exception e) {
-//					logger.error("解析数据包异常:",e);
-//				}
+				} catch (Exception e) {
+					logger.error("数据包处理异常:",e);
+				}
 	        }
 	    } finally {
 	    	logger.info("释放资源");

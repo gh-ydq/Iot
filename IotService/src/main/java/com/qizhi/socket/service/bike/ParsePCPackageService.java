@@ -21,10 +21,10 @@ public class ParsePCPackageService extends ParsePackageServiceImpl{
 		byte[] params =  new byte[bytes.length-8];
 		System.arraycopy(bytes, 8, params, 0, bytes.length-8);
 		String param = ByteArrayToNumber.bytesToString(params);
-		PCPacketDto pcPacketDto = buildPGPacketDto(header0, header1, imei,seq,cmd,param);
+		PCPacketDto pcPacketDto = buildPCPacketDto(bytes.length,header0, header1, imei,seq,cmd,param);
 		PCManage pcManage = new PCManage();
-		pcManage.saveUpPCInfo(pcPacketDto);
-		pcManage.sendMsg(pcPacketDto);
+//		pcManage.saveUpPCInfo(pcPacketDto);
+//		pcManage.sendMsg(pcPacketDto);
 		return pcPacketDto;
 	}
 	@Override
@@ -34,23 +34,23 @@ public class ParsePCPackageService extends ParsePackageServiceImpl{
 		byte[] params =  new byte[bytes.length-8];
 		System.arraycopy(bytes, 8, params, 0, bytes.length-8);
 		String param = ByteArrayToNumber.bytesToString(params);
-		PCPacketDto pcPacketDto = buildPGPacketDto(header0, header1, imei,seq,cmd,param);
+		PCPacketDto pcPacketDto = buildPCPacketDto(bytes.length,header0, header1, imei,seq,cmd,param);
 		PCManage pcManage = new PCManage();
 		pcManage.saveDownPCInfo(pcPacketDto);
 		return pcPacketDto;
 	}
 	
-	private PCPacketDto buildPGPacketDto(char header0,char header1,int imei,
+	private PCPacketDto buildPCPacketDto(int bytesLength,char header0,char header1,int imei,
 			byte seq,byte cmd,String param){
-		PCPacketDto pgPacketDto = new PCPacketDto();
-		pgPacketDto.setHeader0(header0);
-		pgPacketDto.setHeader1(header1);
-		pgPacketDto.setImei(imei);
-		pgPacketDto.setSeq(seq);
-		pgPacketDto.setCmd(cmd);
-		pgPacketDto.setParam(param);
-		logger.info("pgPacketDto["+pgPacketDto+"]");
-		return pgPacketDto;
+		PCPacketDto pcPacketDto = new PCPacketDto();
+		pcPacketDto.setHeader0(header0);
+		pcPacketDto.setHeader1(header1);
+		pcPacketDto.setImei(imei);
+		pcPacketDto.setSeq(seq);
+		pcPacketDto.setCmd(cmd);
+		pcPacketDto.setParam(param);
+		logger.info("pcPacketDto["+pcPacketDto.toString()+"]");
+		return pcPacketDto;
 	}
 	
 	public void sendDownCmdPackage(byte[] bytes,String imeiKey){

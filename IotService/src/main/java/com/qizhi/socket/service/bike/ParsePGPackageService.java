@@ -25,10 +25,10 @@ public class ParsePGPackageService extends ParsePackageServiceImpl{
 		byte star = bytes[19];
 		int time = ByteArrayToNumber.byteArrayToInt(bytes, 20);
 		GPRSSubStatus pgSubStatus = buildPGSubStatus(status);
-		PGPacketDto pgPacketDto = buildPGPacketDto(header0, header1, imei, lng, lat, hight, speed, status, star,time, pgSubStatus);
+		PGPacketDto pgPacketDto = buildPGPacketDto(bytes.length,header0, header1, imei, lng, lat, hight, speed, status, star,time, pgSubStatus);
 		PGManage pgManage = new PGManage();
-		pgManage.savePGInfo(pgPacketDto);
-		pgManage.sendMsg(pgPacketDto);
+//		pgManage.savePGInfo(pgPacketDto);
+//		pgManage.sendMsg(pgPacketDto);
 		return pgPacketDto;
 	}
 	
@@ -49,14 +49,14 @@ public class ParsePGPackageService extends ParsePackageServiceImpl{
 		pgSubStatus.setEDoorSwitchStatus(eDoorSwitchStatus);
 		pgSubStatus.setSilentModeStatus(silentModeStatus);
 		pgSubStatus.setBluetoothLockStatus(bluetoothLockStatus);
-		System.out.println("pgSubStatus["+pgSubStatus+"]");
 		return pgSubStatus;
 	}
 	
-	private PGPacketDto buildPGPacketDto(char header0,char header1,int imei,
+	private PGPacketDto buildPGPacketDto(int bytesLength,char header0,char header1,int imei,
 			int lng,int lat, short hight,short speed,
 			byte status,byte star,int time,GPRSSubStatus pgSubStatus){
 		PGPacketDto pgPacketDto = new PGPacketDto();
+		pgPacketDto.setLength(bytesLength);
 		pgPacketDto.setHeader0(header0);
 		pgPacketDto.setHeader1(header1);
 		pgPacketDto.setImei(imei);
@@ -68,7 +68,7 @@ public class ParsePGPackageService extends ParsePackageServiceImpl{
 		pgPacketDto.setStar(star);
 		pgPacketDto.setTime(time);
 		pgPacketDto.setPgSubStatus(pgSubStatus);
-		logger.info("pgPacketDto["+pgPacketDto+"]");
+		logger.info("pgPacketDto["+pgPacketDto.toString()+"]");
 		return pgPacketDto;
 	}
 }

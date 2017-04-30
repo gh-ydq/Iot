@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 
 public class Connection {
 	
-	private static String DOMAIN_NAME = "118.178.224.165";
+	private static String DOMAIN_NAME = "192.168.2.149";
 	private static int PORT = 8088;
 	
 	private static int TIME_OUT = 5000;
@@ -50,13 +50,13 @@ public class Connection {
 	}
 	
 	/**
-	* ÅÐ¶ÏÊÇ·ñ¶Ï¿ªÁ¬½Ó£¬¶Ï¿ª·µ»Øtrue,Ã»ÓÐ·µ»Øfalse
+	* ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½true,Ã»ï¿½Ð·ï¿½ï¿½ï¿½false
 	* @param socket
 	* @return
 	*/ 
 	public static Boolean isServerClose(Socket socket){ 
 	   try{ 
-	    socket.sendUrgentData(0xFF);//·¢ËÍ1¸ö×Ö½ÚµÄ½ô¼±Êý¾Ý£¬Ä¬ÈÏÇé¿öÏÂ£¬·þÎñÆ÷¶ËÃ»ÓÐ¿ªÆô½ô¼±Êý¾Ý´¦Àí£¬²»Ó°ÏìÕý³£Í¨ÐÅ 
+	    socket.sendUrgentData(0xFF);//ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½Ö½ÚµÄ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ 
 	    return false; 
 	   }catch(Exception se){ 
 	    return true; 
@@ -107,7 +107,7 @@ public class Connection {
 	}
 	
 	/**
-	 * ÉèÖÃÄ¿±ê·þÎñÆ÷µÄÓòÃû»òÕßIPµØÖ·
+	 * ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IPï¿½ï¿½Ö·
 	 */
 	public void SetDOMAIN_NAME(String domain_name){
 		 if (domain_name != null && domain_name != ""){
@@ -117,7 +117,7 @@ public class Connection {
 	
 
 	/**
-	 * ÉèÖÃÄ¿±ê·þÎñÆ÷¶Ë¿Ú£¬Ä¬ÈÏÎª8088¶Ë¿Ú
+	 * ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿Ú£ï¿½Ä¬ï¿½ï¿½Îª8088ï¿½Ë¿ï¿½
 	 */
 	public void SetPORT(int port){
 		 if (port >0){
@@ -126,7 +126,7 @@ public class Connection {
 	}
 
 	/**
-	 * ÉèÖÃ³¬Ê±Ê±¼ä£¬Ä¬ÈÏÎª5Ãë
+	 * ï¿½ï¿½ï¿½Ã³ï¿½Ê±Ê±ï¿½ä£¬Ä¬ï¿½ï¿½Îª5ï¿½ï¿½
 	 */
 	public void SetTIME_OUT(int time_out){
 		 if (time_out >0){

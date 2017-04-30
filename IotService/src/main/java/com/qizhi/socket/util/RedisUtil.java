@@ -18,7 +18,8 @@ public class RedisUtil {
 	private static JedisPool jedisPool;// 非切片连接池
 	private static int defautlDb = 0;// 默认数据库
 	private static final Object lockObj = new Object();
-	private static String REDIS_SERVER_HOST="118.178.224.165";
+	// 192.168.47.128
+	private static String REDIS_SERVER_HOST="183.194.77.74";
 	private static int REDIS_SERVER_PORT=6379;
 	private static int REDIS_SERVER_MAXWAIT=1000;
 	private static int REDIS_SERVER_MAXTOTAL=2000;

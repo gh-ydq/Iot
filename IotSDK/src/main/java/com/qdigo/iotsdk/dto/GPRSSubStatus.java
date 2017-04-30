@@ -1,4 +1,4 @@
-package com.qizhi.socket.dto.gprs;
+package main.java.com.qdigo.iotsdk.dto;
 
 import java.io.Serializable;
 

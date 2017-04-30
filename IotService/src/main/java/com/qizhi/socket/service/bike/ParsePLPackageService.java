@@ -24,10 +24,10 @@ public class ParsePLPackageService extends ParsePackageServiceImpl{
 		byte status = bytes[16];
 		int time = ByteArrayToNumber.byteArrayToShort(bytes, 17);
 		GPRSSubStatus pgSubStatus = buildPLSubStatus(status);
-		PLPacketDto plPacketDto = buildPLPacketDto(header0, header1, imei, lac, cellid, signal,status, time,pgSubStatus);
+		PLPacketDto plPacketDto = buildPLPacketDto(bytes.length,header0, header1, imei, lac, cellid, signal,status, time,pgSubStatus);
 		PLManage plManage = new PLManage();
-		plManage.savePLInfo(plPacketDto);
-		plManage.sendMsg(plPacketDto);
+//		plManage.savePLInfo(plPacketDto);
+//		plManage.sendMsg(plPacketDto);
 		return plPacketDto;
 	}
 	
@@ -48,13 +48,13 @@ public class ParsePLPackageService extends ParsePackageServiceImpl{
 		plSubStatus.setEDoorSwitchStatus(eDoorSwitchStatus);
 		plSubStatus.setSilentModeStatus(silentModeStatus);
 		plSubStatus.setBluetoothLockStatus(bluetoothLockStatus);
-		System.out.println("plSubStatus["+plSubStatus+"]");
 		return plSubStatus;
 	}
 	
-	private PLPacketDto buildPLPacketDto(char header0,char header1,int imei,
+	private PLPacketDto buildPLPacketDto(int bytesLength,char header0,char header1,int imei,
 			int lac,int cellid,short signal,byte status,int time,GPRSSubStatus plSubStatus){
 		PLPacketDto plPacketDto = new PLPacketDto();
+		plPacketDto.setLength(bytesLength);
 		plPacketDto.setHeader0(header0);
 		plPacketDto.setHeader1(header1);
 		plPacketDto.setImei(imei);
@@ -64,7 +64,7 @@ public class ParsePLPackageService extends ParsePackageServiceImpl{
 		plPacketDto.setStatus(status);
 		plPacketDto.setTime(time);
 		plPacketDto.setPlSubStatus(plSubStatus);
-		logger.info("plPacketDto["+plPacketDto+"]");
+		logger.info("plPacketDto["+plPacketDto.toString()+"]");
 		return plPacketDto;
 	}
 
