@@ -1,6 +1,6 @@
-package main.java.com.qdigo.iotsdk.dto.pc;
+package com.qdigo.iotsdk.dto.pc;
 
-import main.java.com.qdigo.iotsdk.dto.DatagramPacketBasicDto;
+import com.qdigo.iotsdk.dto.DatagramPacketBasicDto;
 
 /**
  * PC ����Ӧ�Ĳ���

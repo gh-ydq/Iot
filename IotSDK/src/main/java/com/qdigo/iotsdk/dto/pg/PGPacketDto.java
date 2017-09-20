@@ -1,31 +1,30 @@
-package main.java.com.qdigo.iotsdk.dto.pg;
+package com.qdigo.iotsdk.dto.pg;
 
-import main.java.com.qdigo.iotsdk.dto.DatagramPacketBasicDto;
-import main.java.com.qdigo.iotsdk.dto.GPRSSubStatus;
+import com.qdigo.iotsdk.dto.DatagramPacketBasicDto;
 
 /**
- * PG ����Ӧ�Ĳ���
+ * PG 锟斤拷锟斤拷应锟侥诧拷锟斤拷
  * @author yudengqiu
  *
  */
 public class PGPacketDto extends DatagramPacketBasicDto  {
 
 	private static final long serialVersionUID = -8597161566517930453L;
-	//数据包字节数
+	//鏁版嵁鍖呭瓧鑺傛暟
 	private int length;
-	// 经度
+	// 缁忓害
 	private int lng;
-	// 纬度
+	// 绾害
 	private int lat;
-	// 海拔高度
+	// 娴锋嫈楂樺害
 	private short hight;
-	// 速度（*100） 取整
+	// 閫熷害锛�*100锛� 鍙栨暣
 	private short speed;
-	//设备状态
+	//璁惧鐘舵��
 	private byte status;
-	// 卫星数目
+	// 鍗槦鏁扮洰
 	private byte star;
-	//UnixTime 时间，0时区，具体时区由应用层计算
+	//UnixTime 鏃堕棿锛�0鏃跺尯锛屽叿浣撴椂鍖虹敱搴旂敤灞傝绠�
 	private int time;
 	public int getLength() {
 		return length;

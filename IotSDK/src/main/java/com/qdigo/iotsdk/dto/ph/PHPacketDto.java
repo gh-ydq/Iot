@@ -1,16 +1,16 @@
-package main.java.com.qdigo.iotsdk.dto.ph;
+package com.qdigo.iotsdk.dto.ph;
 
-import main.java.com.qdigo.iotsdk.dto.DatagramPacketBasicDto;
-import main.java.com.qdigo.iotsdk.dto.GPRSSubStatus;
+import com.qdigo.iotsdk.dto.DatagramPacketBasicDto;
+
 /**
- * PH ���Ӧ�Ĳ���
+ * PH 锟斤拷锟接︼拷牟锟斤拷锟�
  * @author yudengqiu
  *
  */
 public class PHPacketDto extends DatagramPacketBasicDto  {
 
 	private static final long serialVersionUID = 2152662457803329906L;
-	// 数据包字节长度
+	// 鏁版嵁鍖呭瓧鑺傞暱搴�
 	private int length;
 	
 	private byte seq;
@@ -22,7 +22,6 @@ public class PHPacketDto extends DatagramPacketBasicDto  {
 	private byte star;
 	private byte ecode;
 	
-	private GPRSSubStatus gprsSubStatus;
 	public int getLength() {
 		return length;
 	}
@@ -76,21 +75,6 @@ public class PHPacketDto extends DatagramPacketBasicDto  {
 	}
 	public void setEcode(byte ecode) {
 		this.ecode = ecode;
-	}
-	
-	
-	public GPRSSubStatus getGprsSubStatus() {
-		return gprsSubStatus;
-	}
-	public void setGprsSubStatus(GPRSSubStatus gprsSubStatus) {
-		this.gprsSubStatus = gprsSubStatus;
-	}
-	@Override
-	public String toString() {
-		return "PHPacketDto [length=" + length + ", seq=" + seq + ", status=" + status + ", imsi=" + imsi
-				+ ", powerVoltage=" + powerVoltage + ", batteryVotage=" + batteryVotage + ", sensity=" + sensity
-				+ ", star=" + star + ", ecode=" + ecode + ", gprsSubStatus=" + gprsSubStatus.toString()
-				+ "]";
 	}
 	
 }

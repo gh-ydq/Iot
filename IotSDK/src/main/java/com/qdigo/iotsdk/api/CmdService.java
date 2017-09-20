@@ -1,17 +1,18 @@
-package main.java.com.qdigo.iotsdk.api;
+package com.qdigo.iotsdk.api;
 
-import main.java.com.qdigo.iotsdk.dto.pc.PCPacketDto;
-import main.java.com.qdigo.iotsdk.dto.pg.PGPacketDto;
-import main.java.com.qdigo.iotsdk.dto.ph.PHPacketDto;
-import main.java.com.qdigo.iotsdk.dto.pl.PLPacketDto;
+import com.qdigo.iotsdk.dto.pg.PGPacketDto;
+import com.qdigo.iotsdk.dto.ph.PHPacketDto;
+import com.qdigo.iotsdk.dto.pl.PLPacketDto;
+
+import com.qdigo.iotsdk.dto.pc.PCPacketDto;
 
 public interface CmdService {
-	// PG包命令
+	// PG鍖呭懡浠�
 	void sendPGData(PGPacketDto pgPacketDto);
-	// PL包命令
+	// PL鍖呭懡浠�
 	void sendPLData(PLPacketDto plPacketDto);
-	// PH包命令
+	// PH鍖呭懡浠�
 	void sendPHData(PHPacketDto phPacketDto);
-	// PC包命令
+	// PC鍖呭懡浠�
 	void sendPCData(PCPacketDto pcPacketDto);
 }

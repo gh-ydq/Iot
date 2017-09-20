@@ -1,7 +1,7 @@
-package main.java.com.qdigo.iotsdk.service;
+package com.qdigo.iotsdk.service;
 
-import main.java.com.qdigo.iotsdk.dto.pl.PLPacketDto;
-import main.java.com.qdigo.iotsdk.util.NumberToByteArray;
+import com.qdigo.iotsdk.dto.pl.PLPacketDto;
+import com.qdigo.iotsdk.util.NumberToByteArray;
 
 public class PLService {
 	public static byte[] buildPLDataAray(PLPacketDto plPacketDto){

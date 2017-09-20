@@ -17,7 +17,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 public class SocketServer {
 	
 	private static Logger logger = LoggerFactory.getLogger(SocketServer.class);
-	private static final int PORT = 8088;
+	private static final int PORT = 9001;
 	
     protected static final int BIZGROUPSIZE = Runtime.getRuntime().availableProcessors()*2; //Ĭ��  
     
@@ -45,7 +45,7 @@ public class SocketServer {
             // Bind and start to accept incoming connections.
             ChannelFuture f = b.bind(PORT).sync(); // (7)
             
-            logger.info("server is running on port 8088");
+            logger.info("server is running on port "+PORT);
 
             // Wait until the server socket is closed.
             // In this example, this does not happen, but you can do that to gracefully

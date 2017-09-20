@@ -1,16 +1,16 @@
-package main.java.com.qdigo.iotsdk.dto;
+package com.qdigo.iotsdk.dto;
 
 import java.io.Serializable;
 
 public class GPRSSubStatus implements Serializable {
 	private static final long serialVersionUID = -5371736380827965009L;
-	// Bit0：电源(1接通，0断开）
+	// Bit0锛氱數婧�(1鎺ラ�氾紝0鏂紑锛�
 	private byte powerStatus;
-	//电门锁开关  bit1
+	//鐢甸棬閿佸紑鍏�  bit1
 	private byte EDoorSwitchStatus;
-	//Bit2： 是否为静默模式
+	//Bit2锛� 鏄惁涓洪潤榛樻ā寮�
 	private byte silentModeStatus;
-	//Bit3：蓝牙是否锁车（1布防，0撤防）
+	//Bit3锛氳摑鐗欐槸鍚﹂攣杞︼紙1甯冮槻锛�0鎾ら槻锛�
 	private byte bluetoothLockStatus;
 	
 	

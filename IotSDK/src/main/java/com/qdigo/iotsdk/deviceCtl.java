@@ -1,51 +1,57 @@
-package main.java.com.qdigo.iotsdk;
+package com.qdigo.iotsdk;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.UnknownHostException;;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class deviceCtl {
+import com.qdigo.iotsdk.CmdBuilder;
+import com.qdigo.iotsdk.Connection;
+import com.qdigo.iotsdk.constant.CmdEnum;;
 
+public class DeviceCtl {
+	private Logger logger = LoggerFactory.getLogger(DeviceCtl.class);
 	static int i_seq = 0;
 	
 
 	/**
-	 * µã»ğ£¬ÓÃÔÚ¹ÜÀíÔ±Ô¶³Ì¿ØÖÆ³µ£¬²»ÊÇÓÃ»§appÆô¶¯³µ£¬²»³£ÓÃ
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı
-	 * ¶ÔÓ¦£ºÇëÇó	3	SEQ	1	µã»ğ1										
+	 * è®¾å¤‡ç‚¹ç«
+	 * @param imei è®¾å¤‡å·
 	 * @return
 	 */
-	public boolean Ignition(long imei) {
-		
-		CmdBuilder builder = new CmdBuilder.Builder().imei(imei).seq((char)i_seq).cmd(3).param("1").build();
-		
+	public boolean deviceStart(long imei) {
+		logger.info("è®¾å¤‡å¼€å§‹ç‚¹ç«imei={}",imei);
+		CmdBuilder builder = new CmdBuilder.Builder()
+				.imei(imei)
+				.seq(CmdEnum.CMD_START.getSeq())
+				.cmd(CmdEnum.CMD_START.getCmd())
+				.param(CmdEnum.CMD_START.getParam()).build();
 		byte[]  cmd = builder.toCmd();
-
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 
 	/**
-	 * Ï¨»ğ£¬ÓÃÔÚ¹ÜÀíÔ±Ô¶³Ì¿ØÖÆ³µ£¬²»ÊÇÓÃ»§app²Ù×÷£¬²»³£ÓÃ
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı
-	 * ¶ÔÓ¦£ºÇëÇó	3	SEQ	1	Ï¨»ğ0
+	 * è®¾å¤‡ç†„ç«
+	 * @param imei è®¾å¤‡å·
 	 * @return
 	 */
-	public boolean Flameout(long imei) {
-		
-		CmdBuilder builder = new CmdBuilder.Builder().imei(imei).seq((char)i_seq).cmd(3).param("0").build();
-		
+	public boolean deviceFlameout(long imei) {
+		logger.info("è®¾å¤‡å¼€å§‹ç†„ç«imei={}",imei);
+		CmdBuilder builder = new CmdBuilder.Builder()
+				.imei(imei)
+				.seq(CmdEnum.CMD_STOP.getSeq())
+				.cmd(CmdEnum.CMD_STOP.getCmd())
+				.param(CmdEnum.CMD_STOP.getParam()).build();
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 
 	/**
-	 * ÉèÖÃGPS·¢°üÆµÂÊºÍĞİÃßÊ±¼äPTIMEÊ±¼ä£¬ÓÃÔÚ¹ÜÀíÔ±Ô¶³Ì¿ØÖÆ³µ£¬²»ÊÇÓÃ»§app²Ù×÷£¬²»³£ÓÃ
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı
-	 * ÇëÇó	7	SEQ	PTIME	ĞŞ¸ÄGPS·¢°üÆµÂÊºÍĞİÃßÊ±¼äPTIME (Ãë)
-	 * pTime µ¥Î»£ºÃë (ĞŞ¸ÄGPS·¢°üÆµÂÊºÍĞİÃßÊ±¼ä)£¬Èç¹û²»ĞŞ¸ÄÔò´«0
+	 * ï¿½ï¿½ï¿½ï¿½GPSï¿½ï¿½ï¿½ï¿½Æµï¿½Êºï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½PTIMEÊ±ï¿½ä£¬ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½Ô±Ô¶ï¿½Ì¿ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½appï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½	7	SEQ	PTIME	ï¿½Ş¸ï¿½GPSï¿½ï¿½ï¿½ï¿½Æµï¿½Êºï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½PTIME (ï¿½ï¿½)
+	 * pTime ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ (ï¿½Ş¸ï¿½GPSï¿½ï¿½ï¿½ï¿½Æµï¿½Êºï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½0
 	 * @return
 	 */
 	public boolean SetPTIME(long imei,int pTime) {
@@ -54,15 +60,15 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 
 	/**
-	 * ÉèÖÃĞŞ¸Ä¹Ø±ÕµçÃÅËøºóĞİÃßÊ±¼ä£¬ÓÃÔÚ¹ÜÀíÔ±Ô¶³Ì¿ØÖÆ³µ£¬²»ÊÇÓÃ»§app²Ù×÷£¬²»³£ÓÃ
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı
-	 * ÇëÇó	7	SEQ	HTIME	ĞŞ¸Ä¹Ø±ÕµçÃÅËøºóĞİÃßÊ±¼ä£¨HTIME Ãë£© 
-	 * hTime µ¥Î»£ºÃë (ĞŞ¸Ä¹Ø±ÕµçÃÅËøºóĞİÃßÊ±¼ä)£¬Èç¹û²»ĞŞ¸ÄÔò´«0
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸Ä¹Ø±Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½Ô±Ô¶ï¿½Ì¿ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½appï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½	7	SEQ	HTIME	ï¿½Ş¸Ä¹Ø±Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¨HTIME ï¿½ë£© 
+	 * hTime ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ (ï¿½Ş¸Ä¹Ø±Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½0
 	 * @return
 	 */
 	public boolean SetHTIME(long imei,int hTime) {
@@ -71,14 +77,14 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 		
 
 	/**
-	 * Ó²ÖØÆô
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı
-	 * ¶ÔÓ¦£ºÇëÇó	8	SEQ	1	Ó²ÖØÆô
+	 * Ó²ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	8	SEQ	1	Ó²ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public boolean Reboot(long imei) {
@@ -87,15 +93,15 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 
 	/**
-	 * ÉèÖÃÓ²¼şÁéÃô¶È
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı
-	 * ¶ÔÓ¦£ºÇëÇó	12	SEQ	1	ÉèÖÃÓ²¼şÁéÃô¶È£º bit0~bit3: 1~8,±íÊ¾8¼¶Ó²¼şÁéÃô¶È£¬ 8ÁéÃô¶È×î¸ß
-	 * grade ÎªÁéÃô¶ÈÖµ£¬ÊäÈë·¶Î§£º1-8
+	 * ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	12	SEQ	1	ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ bit0~bit3: 1~8,ï¿½ï¿½Ê¾8ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ 8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * grade Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ë·¶Î§ï¿½ï¿½1-8
 	 * @return
 	 */
 	public boolean SetSensitivity(long imei,int grade) {
@@ -104,14 +110,14 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 
 	/**
-	 * ²¼·À£¨ÉÏËø£¬Ëø³µµÄÒâË¼£©£¬ÓÃ»§ÔÚappÉÏµã»÷ÉÏËøµÄÊ±ºòµ÷ÓÃ
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı
-	 * ¶ÔÓ¦£ºÇëÇó	24	SEQ	1  ²¼·À
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¼ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½appï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	24	SEQ	1  ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public boolean Lock(long imei) {
@@ -120,13 +126,13 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 	/**
-	 * ³··À(¿ªËø)£¬ÓÃ»§ÔÚappÉÏµã»÷¿ªËøµÄÊ±ºòµ÷ÓÃ
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı 
-	 * ¶ÔÓ¦£ºÇëÇó	24	SEQ	0	³··À
+	 * ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½appï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	24	SEQ	0	ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public boolean Unlock(long imei) {
@@ -135,14 +141,14 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 
 	/**
-	 * ×Ô¶¯Ëø³µÉèÖÃ£¬ÅäÖÃÓÃ£¬Èç¹ûµ÷ÓÃ³É¹¦£¬³µÔÚ¶Ïµçºó¹ı¼¸ÃëÖÓ»á×Ô¶¯ÉÏËø
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı 
-	 * ÇëÇó	27	SEQ	1	×Ô¶¯Ëø³µÉèÖÃ£º1×Ô¶¯
+	 * ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * ï¿½ï¿½ï¿½ï¿½	27	SEQ	1	ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½1ï¿½Ô¶ï¿½
 	 * @return
 	 */
 	public boolean AutoLockOn(long imei) {
@@ -151,14 +157,14 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 
 	/**
-	 * ×Ô¶¯Ëø³µÉèÖÃ£¬ÅäÖÃÓÃ£¬Èç¹ûµ÷ÓÃ³É¹¦£¬³µÔÚ¶ÏµçºóĞèÒªÊÖ¶¯ÉÏËø
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı 
-	 * ÇëÇó	27	SEQ	0	×Ô¶¯Ëø³µÉèÖÃ£º0ÊÖ¶¯
+	 * ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶Ïµï¿½ï¿½ï¿½ï¿½Òªï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * ï¿½ï¿½ï¿½ï¿½	27	SEQ	0	ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½0ï¿½Ö¶ï¿½
 	 * @return
 	 */
 	public boolean AutoLockOff(long imei) {
@@ -167,14 +173,14 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 
 
 	/**
-	 * ÇëÇóÁ¢¼´ÉÏ±¨ĞÄÌø°ü²ÎÊı
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı 
-	 * ¶ÔÓ¦£ºÇëÇó	30	SEQ	1	ÇëÇóÁ¢¼´ÉÏ±¨ĞÄÌø°ü²ÎÊı£¬Éè±¸½ÓÊÕµ½ºóÁ¢¼´·¢ËÍÒ»¸öĞÄÌø°ü
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	30	SEQ	1	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public boolean ReqHearbeat(long imei) {
@@ -183,13 +189,13 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 	/**
-	 * Ñ°³µ¿ªÊ¼
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı 
-	 * ¶ÔÓ¦£ºÃüÁî	41	SEQ	1	 1 Ñ°³µ¿ªÊ¼
+	 * Ñ°ï¿½ï¿½ï¿½ï¿½Ê¼
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	41	SEQ	1	 1 Ñ°ï¿½ï¿½ï¿½ï¿½Ê¼
 	 * @return
 	 */
 	public boolean SeekStart(long imei) {
@@ -198,13 +204,13 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 
 	/**
-	 * Ñ°³µ½áÊø
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı 
-	 * ¶ÔÓ¦£ºÃüÁî	41	SEQ	0	 0 Ñ°³µ½áÊø
+	 * Ñ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	41	SEQ	0	 0 Ñ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public boolean SeekEnd(long imei) {
@@ -213,14 +219,14 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 
 	/**
-	 * ÉÏµç
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı 
-	 * ¶ÔÓ¦£ºÃüÁî	42	SEQ 1£ºÉÏµç										
+	 * ï¿½Ïµï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	42	SEQ 1ï¿½ï¿½ï¿½Ïµï¿½										
 	 * @return
 	 */
 	public boolean Fire(long imei) {
@@ -229,13 +235,13 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 
 	/**
-	 * ¶Ïµç
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı 
-	 * ¶ÔÓ¦£ºÃüÁî	42	SEQ 0£º¶Ïµç										
+	 * ï¿½Ïµï¿½
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	42	SEQ 0ï¿½ï¿½ï¿½Ïµï¿½										
 	 * @return
 	 */
 	public boolean Shutdown(long imei) {
@@ -244,15 +250,15 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 	}
 	
 
 	/**
-	 * ÉèÖÃµµÎ»
-	 * @param imei£¬9Î»µÄÊ®½øÖÆÊı 
-	 * @param grade£¬1-3µÄÕûÊı
-	 * ¶ÔÓ¦£ºÃüÁî	44	SEQ		µµÎ»Ò»×Ö½Ú£¬1-3, ÖµÔ½´ó£¬ËÙ¶ÈÔ½¿ì£¨1Âı,2ÖĞµÈ£¬3¿ì)									
+	 * ï¿½ï¿½ï¿½Ãµï¿½Î»
+	 * @param imeiï¿½ï¿½9Î»ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * @param gradeï¿½ï¿½1-3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	44	SEQ		ï¿½ï¿½Î»Ò»ï¿½Ö½Ú£ï¿½1-3, ÖµÔ½ï¿½ï¿½ï¿½Ù¶ï¿½Ô½ï¿½ì£¨1ï¿½ï¿½,2ï¿½ĞµÈ£ï¿½3ï¿½ï¿½)									
 	 * @return
 	 */
 	public boolean SetStall(long imei,int grade){
@@ -262,7 +268,7 @@ public class deviceCtl {
 		
 		byte[]  cmd = builder.toCmd();
 		
-		return Connection.getInstance().SendCmd(cmd);
+		return Connection.getInstance().sendCmd(cmd);
 		
 	}
 	

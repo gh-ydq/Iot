@@ -1,7 +1,7 @@
-package main.java.com.qdigo.iotsdk;
+package com.qdigo.iotsdk;
 
-import main.java.com.qdigo.iotsdk.dto.pg.PGPacketDto;
-import main.java.com.qdigo.iotsdk.impl.CmdServiceImpl;
+import com.qdigo.iotsdk.dto.pg.PGPacketDto;
+import com.qdigo.iotsdk.impl.CmdServiceImpl;
 
 public class Test {
 	private static CmdServiceImpl impl = new CmdServiceImpl(); 
@@ -18,7 +18,8 @@ public class Test {
 		PGPacketDto pgPacketDto = new PGPacketDto();
 		pgPacketDto.setHeader0('P');
 		pgPacketDto.setHeader1('G');
-		
+		pgPacketDto.setIp("192.168.2.198");
+		pgPacketDto.setPort(9001);
 		pgPacketDto.setImei(1234);
 		pgPacketDto.setLat(123);
 		pgPacketDto.setLng(123);

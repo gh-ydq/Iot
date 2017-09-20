@@ -1,4 +1,4 @@
-package main.java.com.qdigo.iotsdk;
+package com.qdigo.iotsdk;
 
 import java.util.Arrays;
 
@@ -57,7 +57,7 @@ public class CmdBuilder {
 		char[] param = CmdBuilder.CMD_PARAM.toCharArray();
 		byte[] res = new byte[8+param.length];
 		res[0] = (byte)'P';
-		res[1] = (byte)'X';
+		res[1] = (byte)'T';
 		res[2] = (byte) (CmdBuilder.CMD_IMEI>>24 & 0xFF);
 		res[3] = (byte) ((CmdBuilder.CMD_IMEI>>16) & 0xFF);
 		res[4] = (byte) ((CmdBuilder.CMD_IMEI>>8) & 0xFF);

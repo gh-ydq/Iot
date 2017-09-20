@@ -1,15 +1,15 @@
-package main.java.com.qdigo.iotsdk.util;
+package com.qdigo.iotsdk.util;
 /**
- * 基本数据类型转字节数组
+ * 鍩烘湰鏁版嵁绫诲瀷杞瓧鑺傛暟缁�
  * @author yudengqiu
  *
  */
 public class NumberToByteArray {
 	/**  
-	    * 将int数值转换为占四个字节的byte数组，本方法适用于(低位在前，高位在后)的顺序。 和bytesToInt（）配套使用 
+	    * 灏唅nt鏁板�艰浆鎹负鍗犲洓涓瓧鑺傜殑byte鏁扮粍锛屾湰鏂规硶閫傜敤浜�(浣庝綅鍦ㄥ墠锛岄珮浣嶅湪鍚�)鐨勯『搴忋�� 鍜宐ytesToInt锛堬級閰嶅浣跨敤 
 	    * @param value  
-	    *            要转换的int值 
-	    * @return byte数组 
+	    *            瑕佽浆鎹㈢殑int鍊� 
+	    * @return byte鏁扮粍 
 	    */    
 	public static byte[] intToBytesLow( int value )   
 	{   
@@ -22,10 +22,10 @@ public class NumberToByteArray {
 	}  
 	
 	/**  
-	    * 将short数值转换为占2个字节的byte数组，本方法适用于(低位在前，高位在后)的顺序。
+	    * 灏唖hort鏁板�艰浆鎹负鍗�2涓瓧鑺傜殑byte鏁扮粍锛屾湰鏂规硶閫傜敤浜�(浣庝綅鍦ㄥ墠锛岄珮浣嶅湪鍚�)鐨勯『搴忋��
 	    * @param value  
-	    *            要转换的short值 
-	    * @return byte数组 
+	    *            瑕佽浆鎹㈢殑short鍊� 
+	    * @return byte鏁扮粍 
 	    */    
 	public static byte[] shortToBytesLow( int value )   
 	{   
@@ -42,7 +42,7 @@ public class NumberToByteArray {
 	
 	
 	/**  
-	    * 将Long数值转换为占8个字节的byte数组，本方法适用于(高位在前，低位在后)的顺序。 
+	    * 灏哃ong鏁板�艰浆鎹负鍗�8涓瓧鑺傜殑byte鏁扮粍锛屾湰鏂规硶閫傜敤浜�(楂樹綅鍦ㄥ墠锛屼綆浣嶅湪鍚�)鐨勯『搴忋�� 
 	    */    
 	public static byte[] longToBytesHight(long value)   
 	{   
@@ -54,7 +54,7 @@ public class NumberToByteArray {
 	}  
 	
 	 /**  
-	    * 将int数值转换为占四个字节的byte数组，本方法适用于(高位在前，低位在后)的顺序。  和bytesToInt2（）配套使用 
+	    * 灏唅nt鏁板�艰浆鎹负鍗犲洓涓瓧鑺傜殑byte鏁扮粍锛屾湰鏂规硶閫傜敤浜�(楂樹綅鍦ㄥ墠锛屼綆浣嶅湪鍚�)鐨勯『搴忋��  鍜宐ytesToInt2锛堬級閰嶅浣跨敤 
 	    */    
 	public static byte[] intToBytesHight(int value)   
 	{   
@@ -67,10 +67,10 @@ public class NumberToByteArray {
 	}  
 	
 	/**  
-	    * 将short数值转换为占2个字节的byte数组，本方法适用于(低位在前，高位在后)的顺序。
+	    * 灏唖hort鏁板�艰浆鎹负鍗�2涓瓧鑺傜殑byte鏁扮粍锛屾湰鏂规硶閫傜敤浜�(浣庝綅鍦ㄥ墠锛岄珮浣嶅湪鍚�)鐨勯『搴忋��
 	    * @param value  
-	    *            要转换的short值 
-	    * @return byte数组 
+	    *            瑕佽浆鎹㈢殑short鍊� 
+	    * @return byte鏁扮粍 
 	    */    
 	public static byte[] shortToBytesHight( int value )   
 	{   

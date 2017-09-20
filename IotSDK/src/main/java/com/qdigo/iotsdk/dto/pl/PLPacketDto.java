@@ -1,25 +1,25 @@
-package main.java.com.qdigo.iotsdk.dto.pl;
+package com.qdigo.iotsdk.dto.pl;
 
-import main.java.com.qdigo.iotsdk.dto.DatagramPacketBasicDto;
-import main.java.com.qdigo.iotsdk.dto.GPRSSubStatus;
+import com.qdigo.iotsdk.dto.DatagramPacketBasicDto;
+import com.qdigo.iotsdk.dto.GPRSSubStatus;
 
 /**
- * PL ����Ӧ�Ĳ���
+ * PL 锟斤拷锟斤拷应锟侥诧拷锟斤拷
  * @author yudengqiu
  *
  */
 public class PLPacketDto extends DatagramPacketBasicDto  {
 
 	private static final long serialVersionUID = 2152662457803329906L;
-	//数据包字节数
+	//鏁版嵁鍖呭瓧鑺傛暟
 	private int length;
-	//位置区域码
+	//浣嶇疆鍖哄煙鐮�
 	private int lac;
-	//基站小区编号
+	//鍩虹珯灏忓尯缂栧彿
 	private int cellid;
-	// 信号强度
+	// 淇″彿寮哄害
 	private short signal;
-	//设备状态
+	//璁惧鐘舵��
 	private byte status;
 	//Unixtimestamp
 	private int time;

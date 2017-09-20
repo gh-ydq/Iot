@@ -1,4 +1,4 @@
-package main.java.com.qdigo.iotsdk.dto.ph;
+package com.qdigo.iotsdk.dto.ph;
 
 public class PHErrorCode {
 	private byte phMachineError;
